@@ -15,7 +15,40 @@ class Cliente:
     def validar(self):  # Validamos que el cliente tenga todos los datos importantes
         if not self.nombre or not self.email or not self.telefono:  # Si falta algún dato
             raise DatosInvalidosError("Faltan datos del cliente.")  # Lanzamos un error para decir que algo falta
-        
+        # Yorlan Rivera aporte completamiento codigo cliente 
+        # Validación para asegurar que el email no esté vacío
+        if not self.__email:
+            raise DatosInvalidosError("El email del cliente no puede estar vacío.")
+
+        # Validación de formato de email
+        if "@" not in self.__email or "." not in self.__email:
+            raise DatosInvalidosError("El email del cliente no tiene un formato válido.")
+
+        # Validación para asegurar que el teléfono no esté vacío
+        if not self.__telefono:
+            raise DatosInvalidosError("El teléfono del cliente no puede estar vacío.")
+
+        # Validación para asegurar que el teléfono contiene solo números
+        if not self.__telefono.isdigit():
+            raise DatosInvalidosError("El teléfono solo debe contener números.")
+
+        # Validación para asegurar que el teléfono tenga al menos 7 dígitos
+        if len(self.__telefono) < 7:
+            raise DatosInvalidosError("El teléfono debe tener mínimo 7 dígitos.")
+
+    # Métodos getters para acceder a los datos privados
+    def get_nombre(self):
+        return self.__nombre
+
+    def get_email(self):
+        return self.__email
+
+    def get_telefono(self):
+        return self.__telefono
+
+    # Método para mostrar la información del cliente
+    def mostrar_info(self):
+        return f"Cliente: {self.__nombre} | Email: {self.__email} | Teléfono: {self.__telefono}"        
 #Comentario explicativo:
 # En Cliente, guardamos los datos que un cliente nos da (como su nombre, email y teléfono).
 # El método validar se asegura de que no falte nada importante y si falta algún dato, lanza un error para avisar.
